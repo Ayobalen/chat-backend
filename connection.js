@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PW}@cluster0.s11qz.mongodb.net/chatAppMern?retryWrites=true&w=majority`, ()=> {
-  console.log('connected to mongodb')
+mongoose.connect( process.env.MONGO_URL).then (function () {
+  console.log("Database connected successfully");
+}) .catch (function (err) {
+  console.log("Database connection failed");
 })
