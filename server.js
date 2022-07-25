@@ -38,7 +38,7 @@ function sortRoomMessagesByDate(messages){
 
     date1 = date1[2] + date1[0] + date1[1]
     date2 =  date2[2] + date2[0] + date2[1];
-
+ 
     return date1 < date2 ? -1 : 1
   })
 }
@@ -46,12 +46,12 @@ function sortRoomMessagesByDate(messages){
 // socket connection
 
 io.on('connection', (socket)=> {
-
+ 
   socket.on('new-user', async ()=> {
     const members = await User.find();
     io.emit('new-user', members)
   })
-
+ 
   socket.on('join-room', async(newRoom, previousRoom)=> {
     socket.join(newRoom);
     socket.leave(previousRoom);
