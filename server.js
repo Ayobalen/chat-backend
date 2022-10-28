@@ -22,7 +22,6 @@ const io = require('socket.io')(server, {
   }
 })
 
-
 async function getLastMessagesFromRoom(room){
   let roomMessages = await Message.aggregate([
     {$match: {to: room}},
@@ -64,7 +63,7 @@ io.on('connection', (socket)=> {
     const newMessage = await Message.create({content, from: sender, time, date, to: room});
     let roomMessages = await getLastMessagesFromRoom(room);
     roomMessages = sortRoomMessagesByDate(roomMessages);
-    // sending message to room
+    // sending message to room 
     io.to(room).emit('room-messages', roomMessages);
     socket.broadcast.emit('notifications', room)
   })
